@@ -32,7 +32,8 @@ We follow **Conventional Commits 1.0** extended with **SAFe artifact references*
 | Type | When to Use | Triggers |
 |---|---|---|
 | `feat` | New feature or story implementation | Minor version bump |
-| `fix` | Bug fix | Patch version bump |
+| `fix` | Bug fix tracked as a story | Patch version bump |
+| `bugfix` | Development defect fix (from `bugfix/` branch) | Patch version bump |
 | `docs` | Documentation only | — |
 | `refactor` | Code restructuring — no behavior change | — |
 | `test` | Adding or updating tests | — |
@@ -42,6 +43,7 @@ We follow **Conventional Commits 1.0** extended with **SAFe artifact references*
 | `revert` | Reverting a previous commit | — |
 | `spike` | Spike / research output (findings only) | — |
 | `enabler` | Technical enabler work (infra, architecture) | — |
+| `security` | Security/compliance fix (Polaris, CATO, CVE) | Patch version bump |
 
 ---
 
@@ -63,6 +65,9 @@ Scopes map to **SAFe levels and technical components**:
 | `auth` | Authentication or authorization |
 | `infra` | Infrastructure as code |
 | `deps` | Dependency updates |
+| `sast` | Static analysis / Coverity defect resolution |
+| `compliance` | Security compliance / Polaris findings |
+| `cyber` | Cybersecurity / CATO authorization work |
 
 > Use the most specific scope. Combine if needed: `api/auth`
 
