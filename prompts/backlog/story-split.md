@@ -28,6 +28,36 @@ Act as **Hermione (Product Owner)**. Split the following oversized story:
 
 ---
 
+## Quality Framework
+
+> **Decision rule:**
+> - The resulting **stories** → apply **INVEST** (Independent, Negotiable, Valuable, Estimable, Small, Testable)
+> - The **tasks** broken from each story → apply **SMART** (Specific, Measurable, Achievable, Relevant, Time-boxed)
+> - When splitting a story into tasks: INVEST for the story + SMART for each task
+
+For every story produced, verify each INVEST criterion before finalising:
+
+| Criterion | Check |
+|---|---|
+| **I**ndependent | Can this story be delivered without depending on another story in this split? |
+| **N**egotiable | Is the scope open to discussion, not a fixed contract? |
+| **V**aluable | Does it deliver value to a real user or stakeholder on its own? |
+| **E**stimable | Can the team give it a point estimate? |
+| **S**mall | Fits within one iteration at normal team velocity? |
+| **T**estable | Are acceptance criteria clear enough to write a test? |
+
+For every task produced, verify SMART:
+
+| Criterion | Check |
+|---|---|
+| **S**pecific | Clear action, assignable to one person |
+| **M**easurable | Done state is unambiguous |
+| **A**chievable | Completable within the iteration |
+| **R**elevant | Directly contributes to the parent story |
+| **T**ime-boxed | Has an estimated hour range (e.g., 2–4 h) |
+
+---
+
 ## Expected Output
 
 Apply the best-fit splitting pattern and explain which one was chosen and why.

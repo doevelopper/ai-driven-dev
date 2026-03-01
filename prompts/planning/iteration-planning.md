@@ -43,6 +43,36 @@ STORY-NNN: <title> (N pts) — FEAT-NNN
 
 ---
 
+## Quality Framework
+
+> **Decision rule:**
+> - **Iteration Goals** and **team objectives** → apply **SMART** (Specific, Measurable, Achievable, Relevant, Time-boxed)
+> - **Stories selected** from the backlog → validate against **INVEST** before committing
+> - **Tasks** broken from stories during planning → apply **SMART**
+
+Verify each Iteration Goal against SMART before committing:
+
+| Criterion | Check |
+|---|---|
+| **S**pecific | Goal names the capability or outcome to be delivered |
+| **M**easurable | Has a clear done signal (demo, metric, acceptance) |
+| **A**chievable | Fits within iteration capacity at normal focus factor |
+| **R**elevant | Directly supports a committed PI Objective |
+| **T**ime-boxed | Bounded to this iteration's end date |
+
+Verify each committed story against INVEST:
+
+| Criterion | Check |
+|---|---|
+| **I**ndependent | No blocking dependency on another story in the same iteration |
+| **N**egotiable | Scope can be adjusted if capacity changes |
+| **V**aluable | Delivers user/business value on its own |
+| **E**stimable | Team can assign story points |
+| **S**mall | Fits within available capacity |
+| **T**estable | Acceptance criteria are testable |
+
+---
+
 ## Expected Output
 
 ```markdown

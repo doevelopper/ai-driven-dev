@@ -30,6 +30,25 @@ Act as **Frodo (Product Manager)**. Break the following Capability into ART-leve
 
 ---
 
+## Quality Framework
+
+> **Decision rule:**
+> - **Features** → validate with benefit hypothesis + WSJF prioritisation
+> - **Stories** broken from features → apply **INVEST** (Independent, Negotiable, Valuable, Estimable, Small, Testable)
+
+For every story in the breakdown section, verify INVEST:
+
+| Criterion | Check |
+|---|---|
+| **I**ndependent | Deliverable without hard dependency on sibling stories |
+| **N**egotiable | Scope open to team discussion |
+| **V**aluable | Delivers value on its own (not just a technical task) |
+| **E**stimable | Can be pointed by the team |
+| **S**mall | Fits within a single iteration |
+| **T**estable | Has at least one testable acceptance criterion |
+
+---
+
 ## Expected Output
 
 For **each Feature** generated:
