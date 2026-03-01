@@ -130,7 +130,7 @@
 | **Architecture** | SAD, SArchD, SDD, ElecDD, MechDD, HwBOM, DATADICT | `DOCTYPE-PROJ-Descriptor-v` | §2.6, §3.8 |
 | **Interface** | ICD, ConOps, ADR | `DOCTYPE-PROJ-Descriptor-v` | §2.1, §3.4–3.6 |
 | **Planning** | PMP, SDP, SCMP, SQAP, SVVP | `DOCTYPE-PROJ-v` | §2.5, §3.7 |
-| **Traceability** | RTM, TTM | `DOCTYPE-PROJ-v` | §2.4, §3.11 |
+| **Traceability** | RTM, TTM, TRTM | `DOCTYPE-PROJ-v` | §2.4, §3.11 |
 | **Change Mgmt** | CHG, DEF, ECO | `DOCTYPE-PROJ-v` | §2.8, §3.10 |
 | **Risk** | RISK, SEC, SAF, REL | `DOCTYPE-PROJ-v` | §2.9, §3.12 |
 | **Operational** | RELNOTES, SBOM, INST, OPS, SRV | `DOCTYPE-PROJ-v` | §2.7, §3.9 |
@@ -359,6 +359,14 @@ The following document types are defined to capture requirements and their valid
   - **Purpose**: Map requirements to test cases and test results
   - **Benefits**: Verification coverage analysis, regression test selection
   - **Links**: Requirements → Test Cases → Test Results → Defects
+
+- **`TRTM`**: Threats Requirements Traceability Matrix
+  - **Priority**: HIGH (CRITICAL for security-critical systems)
+  - **Purpose**: Map identified threats from the threat model (SEC) to mitigating security requirements (SecRS), and from those requirements to verification evidence (SecTP/SecTR)
+  - **Benefits**: Threat coverage analysis, security assurance argumentation, audit evidence for IEC 62443 / NIST SP 800-160 / ISO 15408 compliance
+  - **Links**: Threat → SecRS (mitigating requirement) → SecTP (verification test) → SecTR (test result) → Residual Risk
+  - **Relationship**: SEC (threat model) → TRTM → SecRS → SecTP → SecTR; complements RTM by adding the threat dimension
+  - **Standards**: NIST SP 800-160 Vol. 1 (threat-driven assurance), IEC 62443-4-1 (security development lifecycle), ISO/IEC 15408 (Common Criteria threat-to-SFR mapping)
 
 ### 2.5 Project Management and Planning Documents
 
@@ -928,7 +936,7 @@ DOCTYPE-PROJ-[Descriptor]-v
 ```
 
 #### Breakdown:
-- **`DOCTYPE`**: One of `RTM`, `TTM`
+- **`DOCTYPE`**: One of `RTM`, `TTM`, `TRTM`
 - **`PROJ`**: Project initials (e.g., `RAC`)
 - **`[Descriptor]`**: Optional scope (e.g., `SwRS-only`, `SafetyCritical`)
 - **`v`**: Version number
@@ -937,10 +945,13 @@ DOCTYPE-PROJ-[Descriptor]-v
 - `RTM-RAC-1`: Requirements Traceability Matrix for RAC, version 1.
 - `TTM-RAC-1`: Test Traceability Matrix for RAC, version 1.
 - `RTM-RAC-SafetyCritical-2`: Safety-focused RTM subset, version 2.
+- `TRTM-RAC-1`: Threats Requirements Traceability Matrix for RAC, version 1.
+- `TRTM-RAC-NetworkStack-1`: Threat traceability for network stack subsystem, version 1.
 
 #### File Naming Examples:
 - `RTM-RAC-Requirements-Traceability-Matrix.md`
 - `TTM-RAC-Test-Traceability-Matrix.md`
+- `TRTM-RAC-Threats-Requirements-Traceability-Matrix.md`
 
 ### 3.12 Risk and Compliance Document Naming Convention
 
@@ -2290,6 +2301,91 @@ This Requirements Traceability Matrix (RTM) provides bidirectional traceability 
 
 These templates ensure consistency and completeness across all project documentation.
 
+## Threats Requirements Traceability Matrix Template
+
+```markdown
+---
+id: "TRTM-PROJ-Threats-Requirements-Traceability-Matrix"
+title: "Threats Requirements Traceability Matrix"
+doc_type: "TRTM"
+project: "[PROJ]"
+version: 1
+date: "[YYYY-MM-DD]"
+status: "Draft"
+author: "[Name]"
+reviewers: []
+approvers: []
+parent_docs: ["SEC-PROJ-Threat-Model-and-Security-Plan"]
+standards: ["NIST SP 800-160", "IEC 62443-4-1", "ISO/IEC 15408"]
+classification: "Confidential"
+---
+
+# TRTM - Threats Requirements Traceability Matrix
+
+## Document Information
+- **Project**: [Project Name]
+- **Version**: [Version Number]
+- **Date**: [Date]
+- **Author**: [Name]
+- **Threat Model Reference**: [SEC-PROJ-v — the threat model this TRTM traces from]
+
+## Introduction
+This Threats Requirements Traceability Matrix (TRTM) provides bidirectional traceability between identified threats (from the threat model), the security requirements that mitigate them, and the verification evidence that confirms mitigation effectiveness. It answers: *"For every identified threat, which requirements mitigate it, and how is that mitigation verified?"*
+
+## Threat-to-Requirement Traceability
+
+| Threat ID | Threat Description | STRIDE Category | Risk Level | SecRS ID(s) | Mitigation Strategy | SecTP ID | SecTR ID | Verification Status | Residual Risk |
+|-----------|--------------------|-----------------|------------|-------------|---------------------|----------|----------|---------------------|---------------|
+| T-001 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v] | [How the requirement mitigates this threat] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-SecTP-nnnn-v] | [Not Tested/Pass/Fail/Partial] | [Accepted/Mitigated/Open] |
+| T-002 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v], [SecRS-PROJ-R-nnnn-v] | [Mitigation strategy] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-SecTP-nnnn-v] | [Status] | [Status] |
+
+> [!NOTE]
+> A single threat may be mitigated by multiple SecRS requirements, and a single SecRS requirement may mitigate multiple threats. Use comma-separated IDs where many-to-many relationships exist.
+
+## STRIDE Category Reference
+
+| Category | Description | Common Mitigations |
+|----------|-------------|-------------------|
+| **S** — Spoofing | Pretending to be something or someone else | Authentication, digital signatures |
+| **T** — Tampering | Modifying data or code without authorization | Integrity controls, code signing, input validation |
+| **R** — Repudiation | Denying having performed an action | Audit logging, digital signatures, timestamps |
+| **I** — Information Disclosure | Exposing information to unauthorized parties | Encryption, access control, data classification |
+| **D** — Denial of Service | Denying or degrading service to users | Rate limiting, resource management, redundancy |
+| **E** — Elevation of Privilege | Gaining capabilities without authorization | Least privilege, sandboxing, input validation |
+
+## Coverage Analysis
+
+### Threat Coverage
+- Total threats identified: [Number]
+- Threats with mitigating requirements: [Number] ([Percentage]%)
+- Threats without mitigating requirements (gap): [Number]
+- Threats with verified mitigations: [Number] ([Percentage]%)
+- Threats with accepted residual risk: [Number]
+
+### Security Requirement Coverage
+- Total SecRS requirements: [Number]
+- SecRS linked to threats: [Number] ([Percentage]%)
+- Orphaned SecRS (no threat link): [Number] — these may indicate over-engineering or missing threats
+- SecRS with test coverage: [Number] ([Percentage]%)
+
+## Gap Analysis
+
+### Unmitigated Threats
+| Threat ID | Threat Description | Risk Level | Gap Reason | Remediation Plan |
+|-----------|--------------------|------------|------------|------------------|
+| [T-nnn] | [Description] | [Risk] | [No requirement / Partial mitigation / Not tested] | [Planned action] |
+
+### Untested Mitigations
+| SecRS ID | Mitigates Threat | Gap Reason | Remediation Plan |
+|----------|-----------------|------------|------------------|
+| [SecRS-PROJ-...] | [T-nnn] | [No test plan / Test not executed / Test failed] | [Planned action] |
+
+## Revision History
+| Version | Date | Author | Description of Changes |
+|---------|------|--------|------------------------|
+| 1       | [Date] | [Name] | Initial release |
+```
+
 ## Software Development Plan Template
 
 ```markdown
@@ -3161,6 +3257,7 @@ The following is the **complete master list** of all project documents governed 
 |----------|-----------------------|----------|---------|
 | RTM | `RTM-PROJ-Requirements-Traceability-Matrix.md` | HIGH | 2.4 |
 | TTM | `TTM-PROJ-Test-Traceability-Matrix.md` | MEDIUM | 2.4 |
+| TRTM | `TRTM-PROJ-Threats-Requirements-Traceability-Matrix.md` | HIGH | 2.4 |
 
 ### Change Management Documents
 
@@ -3242,6 +3339,7 @@ The following roles have approval authority for different document types:
 - **ConOps**: Operations Manager/Product Owner
 - **RTM**: QA Manager/Documentation Lead
 - **TTM**: Test Manager/QA Lead
+- **TRTM**: Security Engineer/CISO + QA Manager (dual approval required)
 
 **Risk and Compliance Documents:**
 - **RISK**: Project Manager + Safety/Security Engineer
@@ -3298,6 +3396,7 @@ The following RACI matrix clarifies roles and responsibilities for documentation
 | Execute Tests | R | I | I | I | I | C |
 | Approve Test Report | I | C | A | C* | C* | R |
 | Maintain RTM | R | C | I | I | I | A |
+| Maintain TRTM | R | C | I | I | R | A |
 
 *For safety and security-related test plans and reports, Safety Engineer and Security Engineer are Consulted and may have Approval authority.
 
@@ -3361,22 +3460,24 @@ All project documentation should be organized in a standardized folder structure
   /19_TestReports      # All test reports (StRTR, URTR, SysRTR, SwTR, HwTR, SafetyTR, SecTR)
   /20_RTM              # Requirements Traceability Matrices
   /21_TTM              # Test Traceability Matrices
-  /22_Risk_Compliance  # Risk and compliance documents
+  /22_TRTM             # Threats Requirements Traceability Matrices
+    TRTM-PROJ-Threats-Requirements-Traceability-Matrix.md
+  /23_Risk_Compliance  # Risk and compliance documents
     RISK-PROJ-Risk-Register-and-Mitigation.md
     SEC-PROJ-Threat-Model-and-Security-Plan.md
     SAF-PROJ-Safety-Requirements-and-Analysis.md
     REL-PROJ-Reliability-and-Stress-Test-Plan.md
-  /23_Change_Mgmt      # Change management and defect tracking
+  /24_Change_Mgmt      # Change management and defect tracking
     CHG-PROJ-Change-Request-Log.md
     DEF-PROJ-Defect-Log-and-Triage.md
     ECO-PROJ-Engineering-Change-Order-Log.md
-  /24_Release          # Release and deployment documents
+  /25_Release          # Release and deployment documents
     RELNOTES-PROJ-Release-Notes.md
     SBOM-PROJ-Software-Bill-of-Materials.md
     INST-PROJ-Installation-and-Commissioning-Guide.md
     OPS-PROJ-Operations-Manual.md
     SRV-PROJ-Service-and-Diagnostics-Guide.md
-  /25_Supporting       # Supporting documents, references, and annexes
+  /26_Supporting       # Supporting documents, references, and annexes
 /src
   /main/cpp/           # Production source code
   /test/cpp/           # Unit tests (linked to SwTP)
@@ -3652,7 +3753,7 @@ This standard provides a comprehensive framework for managing project documentat
 - **Interface Management**: Structured interface control documents (ICD) and data dictionary (DATADICT) for complex multi-subsystem integration, including electromechanical interfaces
 - **BDD Integration**: Behavior-Driven Development scenarios with @REQ tags providing living documentation and automated traceability from user requirements through acceptance tests
 - **Operational Context**: Concept of Operations (ConOps) documentation bridging stakeholder needs to technical requirements
-- **Comprehensive Traceability**: Requirements Traceability Matrix (RTM) and Test Traceability Matrix (TTM) for complete bidirectional traceability across software, electronic, and mechanical domains
+- **Comprehensive Traceability**: Requirements Traceability Matrix (RTM), Test Traceability Matrix (TTM), and Threats Requirements Traceability Matrix (TRTM) for complete bidirectional traceability across software, electronic, and mechanical domains — including threat-to-requirement-to-verification traceability for security assurance
 - **Change Management**: Formal change request log (CHG), defect tracking (DEF), and Engineering Change Order (ECO) for hardware design change control with BOM and tooling impact assessment
 - **Lifecycle Closure**: Release notes (RELNOTES), SBOM, HwBOM, installation guides (INST), operations manuals (OPS), and service guides (SRV) completing the deployment-to-sustainment loop
 - **Flexible Templates**: Ready-to-use templates for all document types including electronic and mechanical design descriptions
@@ -3696,3 +3797,4 @@ For further assistance, contact [Documentation Lead or Quality Manager].
 |---------|------|--------|------------------------|
 | 1.0 | — | — | Initial release |
 | 1.1 | — | — | Improved document structure (§1 Introduction reorganised with Scope/Benefits); fixed §2.10/§2.11 ordering; added §4.2 Bidirectional Traceability; added §12 Markdown-as-Source Conventions (YAML frontmatter, Mermaid diagrams, admonitions, linting); added Quick Reference table; fixed §3.8 DOCTYPE list completeness; fixed folder numbering in §11.4; added inline `@TRACE` tags for CI/CD; added validation regex for MechRS/MechTP; added revision history |
+| 1.2 | — | — | Added Threats Requirements Traceability Matrix (TRTM) as new document type in §2.4, naming convention in §3.11, full template with STRIDE categories and gap analysis, registered in Project Document Registry, added to approval authorities (§10.2), RACI matrix (§10.3), folder structure (§11.4), and Quick Reference |
