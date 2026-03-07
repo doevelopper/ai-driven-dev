@@ -10,6 +10,9 @@
     - [1.2 Security by Design Standards](#12-security-by-design-standards)
   - [2. Documentation Types](#2-documentation-types)
     - [2.1 Requirements Specifications](#21-requirements-specifications)
+      - [Core Requirements Documents:](#core-requirements-documents)
+      - [Specialized Requirements Documents:](#specialized-requirements-documents)
+      - [Supporting Documents:](#supporting-documents)
     - [2.2 Test Plans](#22-test-plans)
     - [2.3 Test Reports](#23-test-reports)
     - [2.4 Traceability Documents](#24-traceability-documents)
@@ -20,23 +23,64 @@
     - [2.9 Risk and Compliance Documents](#29-risk-and-compliance-documents)
     - [2.10 Product Requirements Document](#210-product-requirements-document)
     - [2.11 Hardware and Mechanical Development Lifecycle Phases](#211-hardware-and-mechanical-development-lifecycle-phases)
+      - [2.11.1 Development Phase Definitions](#2111-development-phase-definitions)
+      - [2.11.2 Phase-Gate Integration with V-Model](#2112-phase-gate-integration-with-v-model)
+      - [2.11.3 Hardware Development Standards Reference](#2113-hardware-development-standards-reference)
   - [3. Naming Convention](#3-naming-convention)
     - [3.1 Requirements Naming Convention](#31-requirements-naming-convention)
+      - [Breakdown:](#breakdown)
+      - [Examples:](#examples)
     - [3.2 Test Plan Naming Convention](#32-test-plan-naming-convention)
+      - [Breakdown:](#breakdown-1)
+      - [Examples:](#examples-1)
     - [3.3 Test Report Naming Convention](#33-test-report-naming-convention)
+      - [Breakdown:](#breakdown-2)
+      - [Examples:](#examples-2)
     - [3.4 Interface Control Document Naming Convention](#34-interface-control-document-naming-convention)
+      - [Breakdown:](#breakdown-3)
+      - [Examples:](#examples-3)
     - [3.5 Concept of Operations Naming Convention](#35-concept-of-operations-naming-convention)
+      - [Breakdown:](#breakdown-4)
+      - [Examples:](#examples-4)
     - [3.6 Architecture Decision Record Naming Convention](#36-architecture-decision-record-naming-convention)
+      - [Breakdown:](#breakdown-5)
+      - [Examples:](#examples-5)
+      - [ADR Status Values:](#adr-status-values)
     - [3.7 Project Management and Planning Document Naming Convention](#37-project-management-and-planning-document-naming-convention)
+      - [Breakdown:](#breakdown-6)
+      - [Examples:](#examples-6)
+      - [File Naming Examples:](#file-naming-examples)
     - [3.8 Architecture and Design Document Naming Convention](#38-architecture-and-design-document-naming-convention)
+      - [Breakdown:](#breakdown-7)
+      - [Examples:](#examples-7)
+      - [File Naming Examples:](#file-naming-examples-1)
     - [3.9 Operational and Lifecycle Document Naming Convention](#39-operational-and-lifecycle-document-naming-convention)
+      - [Breakdown:](#breakdown-8)
+      - [Examples:](#examples-8)
+      - [File Naming Examples:](#file-naming-examples-2)
     - [3.10 Change Management and Defect Document Naming Convention](#310-change-management-and-defect-document-naming-convention)
+      - [Breakdown:](#breakdown-9)
+      - [Examples:](#examples-9)
+      - [File Naming Examples:](#file-naming-examples-3)
     - [3.11 Traceability Document Naming Convention](#311-traceability-document-naming-convention)
+      - [Breakdown:](#breakdown-10)
+      - [Examples:](#examples-10)
+      - [File Naming Examples:](#file-naming-examples-4)
     - [3.12 Risk and Compliance Document Naming Convention](#312-risk-and-compliance-document-naming-convention)
+      - [Breakdown:](#breakdown-11)
+      - [Examples:](#examples-11)
+      - [File Naming Examples:](#file-naming-examples-5)
     - [3.13 Product Requirements Document Naming Convention](#313-product-requirements-document-naming-convention)
+      - [Breakdown:](#breakdown-12)
+      - [Examples:](#examples-12)
+      - [File Naming Examples:](#file-naming-examples-6)
   - [4. Hierarchy and Traceability](#4-hierarchy-and-traceability)
+    - [Visual Representation](#visual-representation)
     - [4.1 Traceability Matrix](#41-traceability-matrix)
     - [4.2 Bidirectional Traceability in Markdown](#42-bidirectional-traceability-in-markdown)
+      - [Upward Traceability (Parent References)](#upward-traceability-parent-references)
+      - [Downward Traceability (Children Listing)](#downward-traceability-children-listing)
+      - [Inline Traceability Tags for CI/CD](#inline-traceability-tags-for-cicd)
   - [5. Requirement Types](#5-requirement-types)
     - [5.1 Requirement States](#51-requirement-states)
     - [5.2 Document States (Non-Requirement Documents)](#52-document-states-non-requirement-documents)
@@ -57,26 +101,22 @@
     - [9.1 Recommended Tools](#91-recommended-tools)
     - [9.2 Templates](#92-templates)
   - [Documentation Templates](#documentation-templates)
-  - [10. Review and Approval Process](#10-review-and-approval-process)
-    - [10.1 Review Checklist](#101-review-checklist)
-    - [10.2 Approval Authorities](#102-approval-authorities)
-    - [10.3 RACI Matrix for Documentation Activities](#103-raci-matrix-for-documentation-activities)
-  - [11. Documentation Lifecycle Management](#11-documentation-lifecycle-management)
-    - [11.1 Storage and Access](#111-storage-and-access)
-    - [11.2 Maintenance](#112-maintenance)
-    - [11.3 Backup and Recovery](#113-backup-and-recovery)
-    - [11.4 Repository Folder Structure](#114-repository-folder-structure)
-  - [12. Markdown-as-Source Conventions](#12-markdown-as-source-conventions)
-    - [12.1 YAML Frontmatter](#121-yaml-frontmatter)
-    - [12.2 Diagrams](#122-diagrams)
-    - [12.3 Admonitions](#123-admonitions)
-    - [12.4 Markdown Linting](#124-markdown-linting)
-  - [13. Metrics and Quality Assurance](#13-metrics-and-quality-assurance)
-    - [13.1 Documentation Quality Metrics](#131-documentation-quality-metrics)
-    - [13.2 Quality Assurance Activities](#132-quality-assurance-activities)
-    - [13.3 Automation and Tooling](#133-automation-and-tooling)
-  - [14. Conclusion](#14-conclusion)
-  - [Revision History](#revision-history)
+  - [Requirements Specification Template](#requirements-specification-template)
+  - [Test Plan Template](#test-plan-template)
+  - [Test Report Template](#test-report-template)
+  - [Safety Requirements Specification Template](#safety-requirements-specification-template)
+  - [Security Requirements Specification Template](#security-requirements-specification-template)
+  - [Interface Control Document Template](#interface-control-document-template)
+  - [Concept of Operations Template](#concept-of-operations-template)
+  - [Architecture Decision Record Template](#architecture-decision-record-template)
+  - [Requirements Traceability Matrix Template](#requirements-traceability-matrix-template)
+  - [Threats Requirements Traceability Matrix Template](#threats-requirements-traceability-matrix-template)
+  - [Software Development Plan Template](#software-development-plan-template)
+  - [Software Configuration Management Plan Template](#software-configuration-management-plan-template)
+  - [Software Quality Assurance Plan Template](#software-quality-assurance-plan-template)
+  - [Software Verification and Validation Plan Template](#software-verification-and-validation-plan-template)
+  - [System Architecture Description Template](#system-architecture-description-template)
+  - [Data Dictionary Template](#data-dictionary-template)
   - [Change Request Log Template](#change-request-log-template)
   - [Defect Log Template](#defect-log-template)
   - [Software Bill of Materials Template](#software-bill-of-materials-template)
@@ -103,15 +143,21 @@
     - [11.2 Maintenance](#112-maintenance)
     - [11.3 Backup and Recovery](#113-backup-and-recovery)
     - [11.4 Repository Folder Structure](#114-repository-folder-structure)
-  - [12. Metrics and Quality Assurance](#12-metrics-and-quality-assurance)
-    - [12.1 Documentation Quality Metrics](#121-documentation-quality-metrics)
-    - [12.2 Quality Assurance Activities](#122-quality-assurance-activities)
-    - [12.3 Automation and Tooling](#123-automation-and-tooling)
-      - [12.3.1 Traceability Validation Script](#1231-traceability-validation-script)
-      - [12.3.2 RTM Auto-Generation](#1232-rtm-auto-generation)
-      - [12.3.3 CI/CD Integration](#1233-cicd-integration)
-      - [12.3.4 Recommended Tools](#1234-recommended-tools)
-  - [13. Conclusion](#13-conclusion)
+  - [12. Markdown-as-Source Conventions](#12-markdown-as-source-conventions)
+    - [12.1 YAML Frontmatter](#121-yaml-frontmatter)
+    - [12.2 Diagrams](#122-diagrams)
+    - [12.3 Admonitions](#123-admonitions)
+    - [12.4 Markdown Linting](#124-markdown-linting)
+  - [13. Metrics and Quality Assurance](#13-metrics-and-quality-assurance)
+    - [13.1 Documentation Quality Metrics](#131-documentation-quality-metrics)
+    - [13.2 Quality Assurance Activities](#132-quality-assurance-activities)
+    - [13.3 Automation and Tooling](#133-automation-and-tooling)
+      - [13.3.1 Traceability Validation Script](#1331-traceability-validation-script)
+      - [13.3.2 RTM Auto-Generation](#1332-rtm-auto-generation)
+      - [13.3.3 CI/CD Integration](#1333-cicd-integration)
+      - [13.3.4 Recommended Tools](#1334-recommended-tools)
+  - [14. Conclusion](#14-conclusion)
+  - [Revision History](#revision-history)
 
 ---
 
@@ -1125,31 +1171,31 @@ Requirements and test plans are organized hierarchically to ensure full traceabi
 │        ├── ICD / DATADICT (Interface & Data Definitions)            │
 │        └── ADR (Architectural Decisions)                            │
 └─────────────────────────────────────────────────────────────────────┘
-        │                               │
-   ┌────┴────┬──────────┬──────────┬────────────┐  │
-   ↓         ↓          ↓          ↓            ↓  │
- SwRS      HwRS      MechRS    SafetyRS       SecRS │
-   ↓         ↓          ↓          ↓            ↓  │
- SwTP      HwTP      MechTP    SafetyTP       SecTP │
-   ↓         ↓          ↓          ↓            ↓  │
- SwTR      HwTR      MechTR    SafetyTR       SecTR │
-   ↓         ↓          ↓                          │
- SArchD   ElecDD    MechDD       ←── HwBOM         │
- / SDD  (Schematic  (CAD/GD&T   (parts inventory)  │
-         PCB/SI)    FEA/CFD)                        │
-   ↓         ↓          ↓                          │
- src/     EVT→DVT→  EVT→DVT→                      │
- main/    PVT        PVT                           │
-   ↓                                                │
- Unit Tests (src/test/)                             │
-   ↓                                                │
- BDD Scenarios/Features (src/it/                    │
-   features/ with @REQ tags)                        │
-                                                    │
-┌───────────────────────────────────────────────────┴──────────────┐
+        │                               │            │
+   ┌────┴────┬──────────┬──────────┬────────────┐    │
+   ↓         ↓          ↓          ↓            ↓    │
+ SwRS      HwRS      MechRS    SafetyRS       SecRS  │
+   ↓         ↓          ↓          ↓            ↓    │
+ SwTP      HwTP      MechTP    SafetyTP       SecTP  │
+   ↓         ↓          ↓          ↓            ↓    │
+ SwTR      HwTR      MechTR    SafetyTR       SecTR  │
+   ↓         ↓          ↓                            │
+ SArchD   ElecDD    MechDD       ←── HwBOM           │
+ / SDD  (Schematic  (CAD/GD&T   (parts inventory)    │
+         PCB/SI)    FEA/CFD)                         │
+   ↓         ↓          ↓                            │
+ src/     EVT→DVT→  EVT→DVT→                         │
+ main/    PVT        PVT                             │
+   ↓                                                 │
+ Unit Tests (src/test/)                              │
+   ↓                                                 │
+ BDD Scenarios/Features (src/it/                     │
+   features/ with @REQ tags)                         │
+                                                     │
+┌────────────────────────────────────────────────────┴─────────────┐
 │  RTM (Requirements Traceability Matrix)                          │
 │  TTM (Test Traceability Matrix)                                  │
-│  CHG (Change Request Log) / DEF (Defect Log) / ECO (Eng Change) │
+│  CHG (Change Request Log) / DEF (Defect Log) / ECO (Eng Change)  │
 └──────────────────────────────────────────────────────────────────┘
                                 │
                                 ▼
@@ -1496,7 +1542,7 @@ Demonstrates security-by-design traceability per NIST SP 800-160:
   - **Test Method**: OWASP testing methodology, automated scanning, manual assessment
 
 - **Security Test Report**:
-  - `SecTR-RAC-SecTP-0001-0001-P-20251120-1` [SecTP-RAC-0001-1]: TLS 1.3 implementation validated, no critical vulnerabilities found (PASS)
+  - `SecTR-RAC-0001-1` [SecTP-RAC-0001-1]: TLS 1.3 implementation validated, no critical vulnerabilities found (PASS)
 
 **Example 8: Interface Control Document Application**
 
@@ -2336,8 +2382,8 @@ This Threats Requirements Traceability Matrix (TRTM) provides bidirectional trac
 
 | Threat ID | Threat Description | STRIDE Category | Risk Level | SecRS ID(s) | Mitigation Strategy | SecTP ID | SecTR ID | Verification Status | Residual Risk |
 |-----------|--------------------|-----------------|------------|-------------|---------------------|----------|----------|---------------------|---------------|
-| T-001 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v] | [How the requirement mitigates this threat] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-SecTP-nnnn-v] | [Not Tested/Pass/Fail/Partial] | [Accepted/Mitigated/Open] |
-| T-002 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v], [SecRS-PROJ-R-nnnn-v] | [Mitigation strategy] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-SecTP-nnnn-v] | [Status] | [Status] |
+| T-001 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v] | [How the requirement mitigates this threat] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-nnnn-v] | [Not Tested/Pass/Fail/Partial] | [Accepted/Mitigated/Open] |
+| T-002 | [Threat description] | [S/T/R/I/D/E] | [Critical/High/Medium/Low] | [SecRS-PROJ-M-nnnn-v], [SecRS-PROJ-R-nnnn-v] | [Mitigation strategy] | [SecTP-PROJ-nnnn-v] | [SecTR-PROJ-nnnn-v] | [Status] | [Status] |
 
 > [!NOTE]
 > A single threat may be mitigated by multiple SecRS requirements, and a single SecRS requirement may mitigate multiple threats. Use comma-separated IDs where many-to-many relationships exist.

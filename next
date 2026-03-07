@@ -1,0 +1,9 @@
+ Total usage est:        16 Premium requests
+ API time spent:         39m 2s
+ Total session time:     3h 26m 46s
+ Total code changes:     +7863 -311
+ Breakdown by AI model:
+  claude-sonnet-4.6       5.6m in, 111.7k out, 5.0m cached (Est. 10 Premium requests)
+  claude-opus-4.6         6.5m in, 37.4k out, 6.1m cached (Est. 6 Premium requests)
+
+ Resume this session with copilot --resume=8a85955e-9785-4d5f-a6d6-98b579db4c45
